@@ -6,138 +6,97 @@
 	* 
 	*/
 
-  // $rwdTable-color: $c_darkRed;
-  // $rwdTable-borderColor: $c_darkRed;
-  $rwdTable-color: $darkGrayColor;
-  $rwdTable-borderColor: $blackColor;
+$c-rwdTable-textColor: #333;
+$c-rwdTable-borderColor: #333;
+$c-rwdTable-bgColor: #ffffff;
 
-  /*=============================================
-  =            .rwdTable            =
-  =============================================*/
-  
-  .rwdTable{
-    width: 99.9%;
-    background-color: #ffffff;
-    border-collapse: collapse;
-    // margin-bottom: 20px;
-  
-    & td, & th{
-      padding: 5px;
-      @include small{
-        padding: 10px 15px;
-      }
-  
-      &:nth-child(1){
-        text-align: center;
-      }
-    }
-    & tbody {
-      // tr{
-      //   border: 1px solid $rwdTable-borderColor;
-      // }
-      // & tr:nth-child(odd) {
-      //   background-color: rgba($rwdTable-color, 0.1);
-      //   // @include mobile {
-      //   //   & td{
-      //   //     border-bottom: 1px solid rgba($rwdTable-color, 0.5) !important;
-      //   //     &:last-child {
-      //   //       border-bottom-color: transparent !important;
-      //   //     }
-      //   //   }
-      //   // }
-      // }
-    }
-    td{
-      // color: #666666;
-      // border: #ddd 1px solid;
-      border: 1px solid $rwdTable-borderColor;
-      vertical-align: top;
-      // @include medium{
-      //   max-width: 25vw;
-      // }
-    }
-    th{
-      // background-color: $rwdTable-color;
-      // color:#ffffff;
-      border: $rwdTable-color 1px solid;
-      // text-align: center;
-      @include medium{
-        white-space: nowrap;
-      }
-    }
+/*=============================================
+=            .c-rwdTable            =
+=============================================*/
 
-    
-    &--break{
-      // @include medium{
-      //   td {
-      //     max-width: 60vw;
-      //   }
-      // }
-      @include medium-below{
-        background-color: transparent !important;  
-        
-        tr, td{
-          &:nth-child(1){
-            text-align: left;
-          }
-        }
-        
-        thead, tbody, th, td, tr { 
-          display: block; 
-        }
-    
-        thead {
-          tr { 
-            position: absolute;
-            top: -9999px;
-            left: -9999px;
-          }
-        }
-        tbody{
-          tr{
-            border: 1px solid #ccc; 
-          }
-        }
-    
-        tr { 
-          margin-bottom: 10px; 
-          background-color: #ffffff;
-        }
-    
-        td { 
-          /* Behave  like a "row" */
-          border: none !important;
-          // border-bottom: 1px solid #ccc !important;  
-          position: relative;
-          // padding-left: 35% !important; 
-          white-space: normal;
-          text-align:left;
-      
-          &:before { 
-            // position: absolute;
-            // top: 6px;
-            // left: 6px;
-            // width: 30%; 
-            // white-space: nowrap;
-            width: 42%;
-            display: inline-block;
-            padding-right: 10px; 
-            text-align: right;
-            font-weight: bold;
-            vertical-align: top;
-            content: attr(data-title);
-            color: $rwdTable-color;
-          }
-    
-          .tableContent {
-            max-width: 53%;
-            display: inline-block;
-          }
-        }
-      }
-
+.c-rwdTable {
+  width: 99.9%;
+  background-color: $c-rwdTable-bgColor;
+  border-collapse: collapse;
+  
+  & .c-rwdTableTd, & .c-rwdTableTh {
+    @include media-breakpoint-down(lg) {
+      padding: 5px 0px;
+    }
+    @include media-breakpoint-up(md) {
+      padding: 10px 15px;
     }
   }
-    
-  /*=====  End of /.rwdTable  ======*/
+  .c-rwdTableTh {
+    // background-color: $c-rwdTable-bgColor;
+    border: $c-rwdTable-borderColor 1px solid;
+    @include media-breakpoint-up(md) {
+      white-space: nowrap;
+    }
+  }
+  // & .c-rwdTableTbody {
+  // }
+  .c-rwdTableTd {
+    border: 1px solid $c-rwdTable-borderColor;
+  }
+  .c-rwdTableTr {
+    @include media-breakpoint-down(lg) {
+      padding-top: 15px;
+      padding-bottom: 15px;
+    }
+  }
+
+  &--break {
+    @include media-breakpoint-down(sm) {
+      // background-color: transparent !important;
+      .c-rwdTableThead, 
+      .c-rwdTableTbody, 
+      .c-rwdTableTh, 
+      .c-rwdTableTd, 
+      .c-rwdTableTr { 
+        display: block; 
+      }
+
+      .c-rwdTableThead {
+        .c-rwdTableTr { 
+          position: absolute;
+          top: -9999px;
+          left: -9999px;
+        }
+      }
+      .c-rwdTableTbody{
+        .c-rwdTableTr{
+          border: 1px solid #ccc; 
+        }
+      }
+
+      .c-rwdTableTr { 
+        margin-bottom: 10px; 
+        background-color: #ffffff;
+      }
+
+      .c-rwdTableTd { 
+        border: none !important;
+        position: relative;
+        white-space: normal;
+        text-align:left;
+        display: flex;
+
+        &:before { 
+          min-width: 8rem;
+          // display: inline-block;
+          padding-right: 10px; 
+          text-align: right;
+          font-weight: bold;
+          vertical-align: top;
+          content: attr(data-title);
+          color: $c-rwdTable-textColor;
+        }
+      }
+    }
+
+  }
+  // /.--break 
+}
+/*=====  End of /.c-rwdTable  ======*/
   

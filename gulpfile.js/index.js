@@ -107,6 +107,20 @@ gulp.task('clean', function () {
     .src(['./.tmp', './output'], {read: false, allowEmpty: true})
     .pipe($.clean());
 });
+``
+
+gulp.task("copyFavIcons", function(){
+  return gulp
+    .src(
+      [
+        './source/favicon.ico'
+      ]
+    )
+    .pipe(
+      gulp.dest('./output/')
+    )
+});
+
 
 gulp.task("imageMin", function(){
   return gulp
@@ -154,7 +168,8 @@ gulp.task('build',
       // 'jade', 
       'sass', 
       'babel', 
-      'imageMin'
+      'imageMin',
+      'copyFavIcons'
     )
   )
 );
@@ -169,7 +184,8 @@ gulp.task('default',
       // 'jade', 
       'sass', 
       'babel', 
-      'imageMin'
+      'imageMin',
+      'copyFavIcons'
     ),
     function(done){
 

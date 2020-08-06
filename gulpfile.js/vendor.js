@@ -5,13 +5,19 @@ var { options } = require('./options');
 var vendorJs = function(cd){
   gulp
     .src([
-      './source/assets/js/mergeVendors/**/*.js'
-      ,
       './node_modules/jquery/dist/jquery.js'
       ,
+      './node_modules/vue/dist/vue.js'
+      ,
+      // './node_modules/axios/dist/axios.js'
+      // ,
       './node_modules/bootstrap/dist/js/bootstrap.bundle.js'
     ])
-    .pipe($.order(['jquery.js']))
+    .pipe($.order([
+      'vue.js', 
+      // 'axios.js', 
+      'jquery.js',
+    ]))
     .pipe($.concat('allVendors.js'))
     .pipe($.if(options.env === 'production', $.uglify()))
     .pipe(gulp.dest('./output/assets/js'));

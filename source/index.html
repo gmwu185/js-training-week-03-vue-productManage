@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>index</title>
+  <link rel="stylesheet" href="assets/css/all.css">
+</head>
+<body>
+
+  <main id="app">
+    <div class="container">
+
+      <div class="text-right pt-4 mb-3">
+        <button class="btn btn-dark" type="button" data-toggle="modal" data-target="#productModal">建立新的產品</button>
+      </div>
+
+      <hr class="mb-4">
+
+      <table class="c-rwdTable c-rwdTable--break">
+        <thead class="c-rwdTableThead">
+          <tr class="c-rwdTableTr">
+            <th class="c-rwdTableTh">分類</th>
+            <th class="c-rwdTableTh">產品名稱</th>
+            <th class="c-rwdTableTh">原價</th>
+            <th class="c-rwdTableTh">售價</th>
+            <th class="c-rwdTableTh">是否啟用</th>
+            <th class="c-rwdTableTh">資料操作</th>
+          </tr>
+        </thead>
+        <tbody class="c-rwdTableTbody">
+          <tr class="c-rwdTableTr" v-for="(item, key) in products" :key="item.id">
+            <td class="c-rwdTableTd text-nowrap" data-title="分類">
+              {{ item.unit }}
+            </td>
+            <td class="c-rwdTableTd" data-title="產品名稱">
+              {{ item.title }}
+            </td>
+            <td class="c-rwdTableTd text-nowrap" data-title="原價">
+              {{ item.origin_price }}
+            </td>
+            <td class="c-rwdTableTd text-nowrap" data-title="售價">
+              {{ item.price }}
+            </td>
+            <td class="c-rwdTableTd text-nowrap" data-title="是否啟用">
+              <span v-if="item.enabled" class="text-info">啟用</span>
+              <span v-else class="text-muted">未啟用</span>
+            </td>
+            <td class="c-rwdTableTd text-nowrap" data-title="資料操作">
+              <button class="btn btn-outline-dark btn-sm my-1 mr-1" type="button"
+              @click="openMmodal('edit')">編輯</button>
+              <button class="btn btn-outline-danger btn-sm my-1 mr-1" type="button"
+              @click="openMmodal('del')">刪除</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">#productModal</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-xl-4">
+                  <div class="form-group">
+                    <label class="col-form-label-sm" for="imageUrl">輸入圖片網址</label>
+                    <!-- v-model="tempProduct.imageUrl" -->
+                    <input class="form-control form-control-sm" id="imageUrl" type="text" placeholder="請輸入圖片連結">
+                  </div>
+                  <!-- :src="tempProduct.imageUrl" -->
+                  <img class="img-thumbnail mb-3" src="https://raw.githubusercontent.com/gmwu185/js-training-week-02-jsajax/gh-pages/assets/img/%E5%8F%B0%E4%B8%AD%E6%96%B0%E7%9B%9B%E7%B6%A0%E5%B7%9D%E6%B0%B4%E5%B2%B8%E5%BB%8A%E9%81%93%E8%B3%9E%E7%87%88_1.jpg">
+                </div>
+                <!-- /.col-xl-4 -->
+                <div class="col-xl-8">
+                  <div class="form-group">
+                    <label for="title">標題</label>
+                    <!-- v-model="editProduct.title"  -->
+                    <input id="title" type="text" class="form-control" placeholder="請輸入標題">
+                  </div>
+                  <!-- /.form-group -->
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="category">分類</label>
+                      <!-- v-model="editProduct.category"  -->
+                      <input class="form-control" id="category" type="text" placeholder="請輸入分類">
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="price">單位</label>
+                      <!-- v-model="editProduct.unit" -->
+                      <input id="unit" type="unit" class="form-control" placeholder="請輸入單位">
+                    </div>
+                  </div>
+                  <!-- /.form-row -->
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="origin_price">原價</label>
+                      <!-- v-model="editProduct.origin_price"  -->
+                      <input class="form-control" id="origin_price" type="number" placeholder="請輸入原價">
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="price">售價</label>
+                      <!-- v-model="editProduct.price" -->
+                      <input id="price" type="number" class="form-control" placeholder="請輸入售價">
+                    </div>
+                  </div>
+                  <!-- /.form-row -->
+                  <hr>
+                  <div class="form-group">
+                    <label for="description">產品描述</label>
+                    <!-- v-model="editProduct.description" -->
+                    <textarea class="form-control" id="description" type="text" placeholder="請輸入產品描述">
+                    </textarea>
+                  </div>
+                  <!-- /.form-group -->
+                  <div class="form-group">
+                    <label for="content">說明內容</label>
+                    <!-- v-model="editProduct.content" -->
+                    <textarea class="form-control" id="content" type="text" placeholder="請輸入說明內容">
+                    </textarea>
+                  </div>
+                  <!-- /.form-group -->
+                  <div class="form-group">
+                    <div class="form-check">
+                      <!-- v-model="editProduct.enabled" -->
+                      <input id="enabled" class="form-check-input" type="checkbox">
+                      <label class="form-check-label" for="enabled">是否啟用</label>
+                    </div>
+                  </div>
+                  <!-- /.form-group -->
+                </div>
+                <!-- /.col-xl-8 -->
+              </div>
+              <!-- /.row -->
+            </div>
+            <!-- /.modal-body -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-dark">確認</button>
+              <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">取消</button>
+            </div>
+            <!-- /.modal-footer -->
+          </div>
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- / #productModal -->
+
+    </div>
+  </main>
+
+  <script src="assets/js/allVendors.js"></script>
+  <script src="assets/js/all.js"></script>
+</body>
+</html>
